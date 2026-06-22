@@ -1,0 +1,107 @@
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/source-sans-3/300.css';
+@import '@fontsource/source-sans-3/400.css';
+@import '@fontsource/source-sans-3/600.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply font-body text-neutral-800 antialiased;
+    margin: 0;
+    background-color: #fcf9f8;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-label font-semibold tracking-widest text-label-md uppercase rounded transition-all duration-200 select-none cursor-pointer border border-transparent;
+  }
+  .btn-sm   { @apply px-4 py-2 text-xs; }
+  .btn-md   { @apply px-6 py-3 text-label-md; }
+  .btn-lg   { @apply px-8 py-4 text-label-lg; }
+
+  .btn-primary {
+    @apply btn btn-md bg-primary text-white hover:bg-primary-600 active:bg-primary-700 shadow-card hover:shadow-card-md;
+  }
+  .btn-secondary {
+    @apply btn btn-md bg-secondary text-white hover:bg-secondary-600 active:bg-secondary-700 shadow-card hover:shadow-card-md;
+  }
+  .btn-inverted {
+    @apply btn btn-md bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900;
+  }
+  .btn-outlined {
+    @apply btn btn-md border-neutral-300 text-neutral-800 bg-transparent hover:border-primary hover:text-primary;
+  }
+  .btn-gold {
+    @apply btn btn-md bg-tertiary text-neutral-900 hover:bg-tertiary-600 shadow-gold;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-xl2 shadow-card overflow-hidden;
+  }
+  .card-hover {
+    @apply card transition-all duration-300 hover:shadow-card-lg hover:-translate-y-0.5;
+  }
+
+  /* Section wrappers */
+  .section-pad {
+    @apply px-4 py-16 md:px-8 lg:px-16 lg:py-24;
+  }
+  .container-site {
+    @apply max-w-7xl mx-auto w-full;
+  }
+
+  /* Typography helpers */
+  .heading-display {
+    @apply font-headline font-bold text-neutral-900;
+  }
+  .text-overline {
+    @apply font-label text-label-md uppercase tracking-widest text-primary font-semibold;
+  }
+  .divider-gold {
+    @apply w-16 h-0.5 bg-gradient-gold rounded-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Hero carousel scroll indicator pulse */
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 0.9; transform: scaleY(1.15); }
+}
+.scroll-indicator {
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
