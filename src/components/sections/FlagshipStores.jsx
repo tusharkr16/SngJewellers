@@ -1,23 +1,25 @@
-import { ArrowRight, MapPin, Clock } from 'lucide-react'
+import { ArrowRight, MapPin, Clock, Phone } from 'lucide-react'
 import header2 from '../../assets/header2.png'
 import header1 from '../../assets/header1.png'
 
 const stores = [
   {
     id: 1,
-    name: 'London Flagship',
-    address: '178 New Bond Street, Mayfair,\nLondon W1S 4RH, United Kingdom',
-    hours: 'Monday - Saturday: 10:00 - 18:30\nSunday: 12:00 - 17:00 (By Appointment)',
+    name: 'SNG Jewellers — Dilshad Garden',
+    address: 'Shop No. 3 & 4, Vardhman Dilshad Plaza,\nLocal Shopping Complex, Opp. Mukherji School,\nPocket O Road, Block O, Dilshad Garden,\nDelhi – 110095',
+    hours: 'Monday - Saturday: 10:00 - 20:00\nSunday: 11:00 - 19:00',
+    phone: '+91 98102 26537',
     image: header2,
-    flip: false, // image left, text right
+    flip: false,
   },
   {
     id: 2,
-    name: 'New York Atelier',
-    address: '730 Fifth Avenue, Crown Building,\nNew York, NY 10019, USA',
-    hours: 'Monday - Friday: 09:00 - 19:00\nSaturday: 11:00 - 18:00',
+    name: 'Book a Private Viewing',
+    address: 'Visit us at our flagship store in Dilshad Garden\nfor an exclusive one-on-one consultation\nwith our master craftsmen.',
+    hours: 'By Appointment Only\nCall us to schedule your session',
+    phone: '+91 98102 26537',
     image: header1,
-    flip: true,  // text left, image right
+    flip: true,
   },
 ]
 
@@ -59,11 +61,22 @@ export default function FlagshipStores() {
               </div>
 
               {/* Hours */}
-              <div className={`flex gap-3 mb-8 ${store.flip ? 'flex-row-reverse' : ''}`}>
+              <div className={`flex gap-3 mb-4 ${store.flip ? 'flex-row-reverse' : ''}`}>
                 <Clock size={16} className="text-primary flex-shrink-0 mt-0.5" strokeWidth={1.8} />
                 <p className="font-body text-neutral-600 text-[0.9rem] leading-[1.7] whitespace-pre-line">
                   {store.hours}
                 </p>
+              </div>
+
+              {/* Phone */}
+              <div className={`flex gap-3 mb-8 ${store.flip ? 'flex-row-reverse' : ''}`}>
+                <Phone size={16} className="text-primary flex-shrink-0 mt-0.5" strokeWidth={1.8} />
+                <a
+                  href={`tel:${store.phone.replace(/\s/g, '')}`}
+                  className="font-body text-neutral-600 hover:text-primary text-[0.9rem] leading-[1.7] transition-colors duration-200"
+                >
+                  {store.phone}
+                </a>
               </div>
 
               {/* CTA */}
