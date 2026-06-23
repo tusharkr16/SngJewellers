@@ -180,10 +180,10 @@ export default function VisitPage() {
                   +91 98102 26537
                 </a>
                 <a
-                  href="mailto:enquiries@sngjewellers.com"
+                  href="mailto:contact@sngjewellers.com"
                   className="font-body text-neutral-500 text-[0.875rem] hover:text-primary transition-colors"
                 >
-                  enquiries@sngjewellers.com
+                  contact@sngjewellers.com
                 </a>
               </div>
             </div>
