@@ -4,19 +4,26 @@ import { ShoppingBag, User, Menu, X } from 'lucide-react'
 import logo from '../../assets/logo.png'
 
 const navLinks = [
+  { label: 'Home',         href: '/' },
   { label: 'Our Heritage', href: '/heritage' },
-  { label: 'Collections',  href: '/#collections' },
-  { label: 'Visit Us',     href: '/#visit' },
+  { label: 'Collections',  href: '/collections' },
+  { label: 'Visit Us',     href: '/visit' },
 ]
+
+// Pages with a white/light background — navbar text must be dark
+const LIGHT_BG_ROUTES = ['/heritage']
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
 
-  const isActive = (href) => {
-    if (href === '/heritage') return pathname === '/heritage'
-    return pathname === '/'
-  }
+  const isLight = LIGHT_BG_ROUTES.includes(pathname)
+
+  const textColor      = isLight ? 'text-neutral-800/90 hover:text-neutral-900' : 'text-white/90 hover:text-white'
+  const iconColor      = isLight ? 'text-neutral-600 hover:text-neutral-900'    : 'text-white/80 hover:text-white'
+  const underlineColor = isLight ? 'bg-primary'                                  : 'bg-white'
+
+  const isActive = (href) => pathname === href
 
   return (
     <header className="absolute top-0 inset-x-0 z-50">
@@ -32,11 +39,11 @@ export default function Navbar() {
             <Link
               key={link.label}
               to={link.href}
-              className="relative font-label text-label-lg tracking-wider text-white/90 hover:text-white transition-colors duration-200"
+              className={`relative font-label text-label-lg tracking-wider transition-colors duration-200 ${textColor}`}
             >
               {link.label}
               {isActive(link.href) && (
-                <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-white rounded-full" />
+                <span className={`absolute -bottom-1 left-0 right-0 h-[2px] ${underlineColor} rounded-full`} />
               )}
             </Link>
           ))}
@@ -44,15 +51,15 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link
-            to="/#appointment"
+            to="/visit"
             className="btn btn-md bg-primary text-white hover:bg-primary-600 text-xs tracking-widest px-5 py-2.5"
           >
             Book Appointment
           </Link>
-          <button aria-label="Cart" className="text-white/80 hover:text-white transition-colors">
+          <button aria-label="Cart" className={`${iconColor} transition-colors`}>
             <ShoppingBag size={20} strokeWidth={1.5} />
           </button>
-          <button aria-label="Account" className="text-white/80 hover:text-white transition-colors">
+          <button aria-label="Account" className={`${iconColor} transition-colors`}>
             <User size={20} strokeWidth={1.5} />
           </button>
         </div>
@@ -64,7 +71,7 @@ export default function Navbar() {
           <button
             aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="text-white/80 hover:text-white transition-colors"
+            className={`${iconColor} transition-colors`}
           >
             {menuOpen ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
           </button>
@@ -78,8 +85,8 @@ export default function Navbar() {
 
         <div className="flex items-center justify-end">
           <Link
-            to="/#appointment"
-            className="font-label font-semibold text-white text-[10px] tracking-widest uppercase text-right leading-tight"
+            to="/visit"
+            className={`font-label font-semibold text-[10px] tracking-widest uppercase text-right leading-tight ${textColor}`}
           >
             Book<br />Appointment
           </Link>
@@ -89,8 +96,8 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-        } bg-neutral-900/90 backdrop-blur-sm`}
+          menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'
+        } bg-neutral-900/95 backdrop-blur-sm`}
       >
         <nav className="flex flex-col px-6 pb-6 pt-2 gap-5">
           {navLinks.map((link) => (
